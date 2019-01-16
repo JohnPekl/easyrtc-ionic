@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Call Demo - {{myCallId}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Call ID:</ion-label>
+      <ion-input type="text" [(ngModel)]="calleeId"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <button *ngIf="showCall" ion-button block (click)='performCall(calleeId)'>Call</button>
+      </ion-col>
+      <ion-col>
+        <button *ngIf="showHangup" ion-button block color="danger" (click)='HangUp()'>Hangup</button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col id ="btnShowAnswer">
+        <button *ngIf="showAnswer" ion-button block color="secondary">Answer</button>
+      </ion-col>
+      <ion-col id="btnShowReject">
+        <button *ngIf="showReject" ion-button block color="danger">Reject</button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <p *ngIf="showStatus" [innerHtml]="status"></p>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="showRemoteVideo">
+      <ion-col>
+        <p>Remote Stream</p>
+        <div id="remote" style="width:100%;">
+          <video autoplay="autoplay" id="callerVideo"></video>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="showMyVideo">
+      <ion-col>
+        <p>My Stream</p>
+        <div id="mini">
+          <video autoplay="autoplay" id="selfVideo" (click)='SwitchCamera()'></video>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
